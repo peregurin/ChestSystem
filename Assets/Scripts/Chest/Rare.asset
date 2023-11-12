@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627f8f41f462a50419f8404a24db5915, type: 3}
+  m_Name: Rare
+  m_EditorClassIdentifier: 
+  chestType: 2
+  coinsRange: {x: 300, y: 500}
+  gemsRange: {x: 20, y: 40}
+  timeToUnlock: 1800
+  chestPrefab: {fileID: 1788951787968489551, guid: fac324549656d4a478a7c62994d05b4c, type: 3}
+  chestSprite: {fileID: 21300000, guid: ebcb3141a0a8a3b46ad80f16be54d2b7, type: 3}
+  bgColor: {r: 0.9607843, g: 0.87058824, b: 0.38431373, a: 1}
