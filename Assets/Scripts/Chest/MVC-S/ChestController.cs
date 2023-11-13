@@ -25,7 +25,7 @@ namespace Chest.Controller{
         public void OnChestButtonClicked(){ 
             var currentState = ChestModel.ChestState;
             if(currentState == ChestState.Locked && !ChestService.Instance.IsAnyOtherChestUnlocking){
-                _ = StartUnlockingChest(ChestModel.TimeToUnlock);
+                ChestService.Instance.ShowOpenChestNowPopup(OpenChestPopupCallback);
             }else if(currentState == ChestState.Unlocking){
                 ChestService.Instance.ShowOpenChestNowPopup(OpenChestPopupCallback);
             }
@@ -40,6 +40,9 @@ namespace Chest.Controller{
                 ChestService.Instance.UseGems(gemsCost);
                 cancellationTokenSource?.Cancel();
                 ChangeChestState(ChestState.Unlocked);
+            }else{
+                if(ChestModel.ChestState == ChestState.Locked)
+                    _ = StartUnlockingChest(ChestModel.TimeToUnlock);
             }
         }
 
@@ -54,8 +57,6 @@ namespace Chest.Controller{
                 cancellationTokenSource.Dispose();
                 cancellationTokenSource = null;
             }
-            await Task.Delay(((int)timeToUnlock)*1000);
-            ChangeChestState(ChestState.Unlocked);
         }
 
         private void CollectChestReward(){

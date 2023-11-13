@@ -29,7 +29,8 @@ namespace Chest.View{
         public float RemainingTime { get => remainingTime; private set => remainingTime = value; }
 
         public void SetController(ChestController chestController){
-            this.chestController = chestController; 
+            this.chestController = chestController;
+            RemainingTime = chestController.ChestModel.TimeToUnlock;
         }
 
         private void Start(){
@@ -69,7 +70,7 @@ namespace Chest.View{
                     SetLockedState(chestModel.TimeToUnlock);
                     break;
                 case ChestState.Unlocking:
-                    SetUnlockingState(chestModel.TimeToUnlock);
+                    SetUnlockingState();
                     break;
                 case ChestState.Unlocked:
                     unlocked.gameObject.SetActive(true);
@@ -96,13 +97,12 @@ namespace Chest.View{
             this.timeToUnlock.text = formattedTime;
         }
 
-        private void SetUnlockingState(float timeToUnlock){
+        private void SetUnlockingState(){
             unlocking.gameObject.SetActive(true);
-            StartCoroutine(UpdateTimer(timeToUnlock));
+            StartCoroutine(UpdateTimer());
         }
 
-        private IEnumerator UpdateTimer(float timeToUnlock){
-            RemainingTime = timeToUnlock;
+        private IEnumerator UpdateTimer(){
             while(RemainingTime>0){
                 UpdateTimerText(RemainingTime);
                 UpdateGemCostText(chestController.CalculateGemCost(RemainingTime));
