@@ -1,8 +1,10 @@
-public enum ChestType
-{
-    None,
-    Common, // Green
-    Rare, // Red
-    Epic, // Blue
-    Legendary // Yellow
+namespace Chest.Types{
+    public enum ChestType
+    {
+        None,
+        Common,
+        Rare,
+        Epic,
+        Legendary
+    }
 }

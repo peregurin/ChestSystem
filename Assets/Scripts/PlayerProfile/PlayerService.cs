@@ -1,34 +1,40 @@
-public class PlayerService : GenericMonoSingleton<PlayerService>
-{
-    private int coinsBalance;
-    private int gemsBalance;
+using Chest.Model;
+using UI.Service;
+using Utility;
 
-    public int GemsBalance { 
-        get => gemsBalance;
-        private set {
-            gemsBalance = value;
-            UIService.Instance.UpdateGemsBalance(gemsBalance);
-        } 
-    }
-    public int CoinsBalance { 
-        get => coinsBalance;
-        private set {
-            coinsBalance = value;
-            UIService.Instance.UpdateCoinsBalance(coinsBalance);   
-        } 
-    }
+namespace Player.Service{
+    public class PlayerService : GenericMonoSingleton<PlayerService>
+    {
+        private int coinsBalance;
+        private int gemsBalance;
 
-    public void UseGems(int gemsUsed){
-        GemsBalance -= gemsUsed;
-    }
+        public int GemsBalance { 
+            get => gemsBalance;
+            private set {
+                gemsBalance = value;
+                UIService.Instance.UpdateGemsBalance(gemsBalance);
+            } 
+        }
+        public int CoinsBalance { 
+            get => coinsBalance;
+            private set {
+                coinsBalance = value;
+                UIService.Instance.UpdateCoinsBalance(coinsBalance);   
+            } 
+        }
 
-    public void Start(){
-        CoinsBalance = 1000;
-        GemsBalance = 20;
-    }
+        public void UseGems(int gemsUsed){
+            GemsBalance -= gemsUsed;
+        }
 
-    public void CollectChestReward(ChestReward chestReward){
-        CoinsBalance += chestReward.coins;
-        GemsBalance += chestReward.gems;
+        public void Start(){
+            CoinsBalance = 1000;
+            GemsBalance = 20;
+        }
+
+        public void CollectChestReward(ChestReward chestReward){
+            CoinsBalance += chestReward.coins;
+            GemsBalance += chestReward.gems;
+        }
     }
 }

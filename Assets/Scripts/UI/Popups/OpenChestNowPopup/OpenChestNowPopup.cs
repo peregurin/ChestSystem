@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OpenChestNowPopup : MonoBehaviour
+namespace Popup.OpenChestNow{
+    public class OpenChestNowPopup : MonoBehaviour
 {
     [SerializeField] private Button openNowButton;
     [SerializeField] private Button closePopupButton;
@@ -27,4 +28,5 @@ public class OpenChestNowPopup : MonoBehaviour
         buttonCallback?.Invoke(false);
         Destroy(gameObject);
     }
+}
 }

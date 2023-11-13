@@ -1,6 +1,8 @@
-public enum ChestState{
-    Locked,
-    Unlocking,
-    Unlocked, 
-    Collected
+namespace Chest.State{
+    public enum ChestState{
+        Locked,
+        Unlocking,
+        Unlocked, 
+        Collected
+    }
 }

@@ -1,8 +1,11 @@
 using System;
+using Popup.OpenChestNow;
 using TMPro;
 using UnityEngine;
+using Utility;
 
-public class UIService : GenericMonoSingleton<UIService>
+namespace UI.Service{
+    public class UIService : GenericMonoSingleton<UIService>
 {
     [SerializeField] private TextMeshProUGUI coinBalance;
     [SerializeField] private TextMeshProUGUI gemsBalance;
@@ -21,4 +24,5 @@ public class UIService : GenericMonoSingleton<UIService>
         var openChestNowPopupView = Instantiate<OpenChestNowPopup>(openChestNowPopup, popupsParent);
         openChestNowPopupView.SetCallback(callback);
     }
+}
 }
