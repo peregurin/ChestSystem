@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Chest.View;
 using Chest.Model;
-using Player.Service;
 using Chest.SO;
 using Chest.State;
-using UI.Service;
+using Chest.Service;
 
 namespace Chest.Controller{
     public class ChestController
@@ -25,10 +24,10 @@ namespace Chest.Controller{
 
         public void OnChestButtonClicked(){ 
             var currentState = ChestModel.ChestState;
-            if(currentState == ChestState.Locked){
-                var variable = StartUnlockingChest(ChestModel.TimeToUnlock);
+            if(currentState == ChestState.Locked && !ChestService.Instance.IsAnyOtherChestUnlocking){
+                _ = StartUnlockingChest(ChestModel.TimeToUnlock);
             }else if(currentState == ChestState.Unlocking){
-                UIService.Instance.ShowOpenChestNowPopup(OpenChestPopupCallback);
+                ChestService.Instance.ShowOpenChestNowPopup(OpenChestPopupCallback);
             }
             else if(currentState == ChestState.Unlocked){
                 CollectChestReward();
@@ -38,7 +37,7 @@ namespace Chest.Controller{
         private void OpenChestPopupCallback(bool useGems){
             if(useGems){
                 var gemsCost = CalculateGemCost(ChestView.RemainingTime);
-                PlayerService.Instance.UseGems(gemsCost);
+                ChestService.Instance.UseGems(gemsCost);
                 cancellationTokenSource?.Cancel();
                 ChangeChestState(ChestState.Unlocked);
             }
@@ -60,7 +59,7 @@ namespace Chest.Controller{
         }
 
         private void CollectChestReward(){
-            PlayerService.Instance.CollectChestReward(ChestModel.ChestReward);
+            ChestService.Instance.CollectChestReward(this);
             ChangeChestState(ChestState.Collected);
         }
 

@@ -35,6 +35,15 @@ namespace Slot.Service{
             }
         }
 
+        public void RemoveChestFromSlot(ChestView chestView){
+            foreach(var slot in slotControllers){
+                if(slot.ChestView == chestView){
+                    slot.VacateSlot();
+                    break;
+                }
+            }
+        }
+
         public bool IsAnySlotEmpty => slotControllers.Any(x => x.IsEmpty);
     }
 }
